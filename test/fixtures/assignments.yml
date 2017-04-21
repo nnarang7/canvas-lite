@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  score: 1.5
+  out_of: 1.5
+  course_id: MyString
+  due: 2017-04-15 22:18:17
+
+two:
+  name: MyString
+  description: MyString
+  score: 1.5
+  out_of: 1.5
+  course_id: MyString
+  due: 2017-04-15 22:18:17

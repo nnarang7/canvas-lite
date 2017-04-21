@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  professor: MyString
+  location: MyString
+  weekdays: MyString
+  time: MyString
+
+two:
+  name: MyString
+  professor: MyString
+  location: MyString
+  weekdays: MyString
+  time: MyString

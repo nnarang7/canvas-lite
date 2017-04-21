@@ -1,0 +1,115 @@
+// Place all the styles related to the Welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	/*padding-top: 50px;*/
+	font-family: 'Asar', serif;
+};
+
+a {
+	color: #00b7ff;
+}
+
+img {
+	width: 140px;
+	height: 140px;
+}
+
+h1 {
+  font-family: 'Asar', serif;  
+}
+
+#intro-bubble {
+	font-family: 'Asar', serif;  
+	/*background-color: #add8e6;*/
+}
+
+.fa-sign-out {
+	float: right;
+}
+
+.lead {
+	font-family: 'Asar', serif;  	
+}
+
+footer {
+  width: 100%;
+  display: inline-block;
+  height: 50px;
+  font-family: 'Arima Madurai', cursive;  
+  background-color: #000000;
+  margin-top: 50px;
+  z-index: 100;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+footer .copyright {
+  width: 50%;
+  float: left;
+}
+@media (max-width: 600px) {
+  footer .copyright {
+    width: 100%;
+  }
+}
+footer .copyright p {
+  color: white;
+  line-height: 50px;
+  text-transform: capitalize;
+  padding-left: 10px;
+}
+
+@media (max-width: 600px) {
+  footer .copyright p {
+    text-align: center;
+    padding: 0;
+  }
+}
+footer .contact {
+  width: 50%;
+  float: right;
+}
+@media (max-width: 600px) {
+  footer .contact {
+    width: 100%;
+  }
+}
+footer .contact a {
+  float: left;
+  line-height: 50px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  -moz-transition: all, 0.3s;
+  -o-transition: all, 0.3s;
+  -webkit-transition: all, 0.3s;
+  transition: all, 0.3s;
+}
+
+footer .contact a:hover {
+  background-color: #222;
+  -moz-transition: all, 0.3s;
+  -o-transition: all, 0.3s;
+  -webkit-transition: all, 0.3s;
+  transition: all, 0.3s;
+}
+
+.linkedin {
+  background-color: #1E83AE;
+  width: 30%;
+}
+
+.facebook {
+  background-color: #3D5B94;
+  width: 30%;
+}
+
+.support {
+  background-color: #800020;
+  width: 40%;
+}

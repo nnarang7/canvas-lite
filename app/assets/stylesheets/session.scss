@@ -1,0 +1,32 @@
+// Place all the styles related to the Session controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body { 
+	font-family: 'Asar', serif;
+}
+
+.login { 
+	font-family: 'Asar', serif;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -150px 0 0 -150px;
+	width:300px;
+	height:300px;
+	background-color: #eee;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 30px;
+}
+
+.login h1 { 
+	font-family: 'Asar', serif;	
+	font-variant: small-caps;
+	text-align: center; 
+}
+
+.login-form {
+	font-family: 'Asar', serif;
+	background-color: #eee;
+}
