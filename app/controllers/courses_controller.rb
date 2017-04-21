@@ -24,6 +24,7 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
+    p course_params
     @course = Course.new(course_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :professor, :location, :weekdays, :time)
+      params.require(:course).permit(:name, :professor, :location, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :starting_time, :ending_time)
     end
 end

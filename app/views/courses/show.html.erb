@@ -17,13 +17,35 @@
 
 <p>
   <strong>Weekdays:</strong>
-  <%= @course.weekdays %>
+  <% if @course.monday %> 
+    Monday,
+  <% end %>
+  <% if @course.tuesday %> 
+    Tuesday,
+  <% end %>
+  <% if @course.wednesday %> 
+    Wednesday,
+  <% end %>
+  <% if @course.thursday %> 
+    Thursday,
+  <% end %>
+  <% if @course.friday %> 
+    Friday,
+  <% end %>
+  <% if @course.saturday %> 
+    Saturday,
+  <% end %>
+  <% if @course.sunday %> 
+    Sunday
+  <% end %>        
 </p>
 
 <p>
   <strong>Time:</strong>
-  <%= @course.time %>
+  <%= @course.starting_time.strftime("%I:%M%p") %> to <%= @course.ending_time.strftime("%I:%M%p") %>
 </p>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
+<% if admin %>
+  <%= link_to 'Edit', edit_course_path(@course) %> |
+<% end %>
 <%= link_to 'Back', courses_path %>

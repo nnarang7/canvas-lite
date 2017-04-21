@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    p "in user create"
     @user = User.new(name: params[:user][:name], email: params[:user][:email])
     @user.password = params[:user][:password]
     @user.is_admin = false

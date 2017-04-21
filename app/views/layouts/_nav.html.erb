@@ -1,10 +1,10 @@
 <nav class="nav-banner">
   <a class="nav-btn" href="/">Home</a>
-  <% if logged_in? && !admin%>
+  <% if logged_in? && !admin %>
     <a class="nav-btn" href="/courses">My Courses</a>
     <a class="nav-btn" href="/assignments">Upcoming Assignments</a>
   <% end %>
-  <% if logged_in? && admin%>
+  <% if logged_in? && admin %>
     <a class="nav-btn" href="/courses">All Courses</a>
     <a class="nav-btn" href="/assignments/all">All Assignments</a>
     <a class="nav-btn" href="/users">All Users</a>
