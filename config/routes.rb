@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   delete '/logout' => 'session#destroy', as: :logout
 
+  get '/my_courses' => 'courses#individual_view', as: :dashboard
+
+  get '/enroll_course' => 'courses#enroll', as: :enroll_course
+
+  get '/unenroll_course' => 'courses#unenroll', as: :unenroll_course
 
   resources :assignments
   resources :courses

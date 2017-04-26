@@ -6,9 +6,10 @@ class User < ActiveRecord::Base
 	validates :name, length: { minimum: 2 }
 	validates :email, presence: true
 	validates :password, presence: true
-	has_many :courses
+	has_many :courses, through: :CoursesUsers
 	has_many :assignments
 	has_many :CoursesAssignments
+	has_many :CoursesUsers
 
 	include BCrypt
 

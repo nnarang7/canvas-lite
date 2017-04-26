@@ -11,6 +11,8 @@
       <th>Weekdays</th>
       <th>Starting Time</th>
       <th>Ending Time</th>
+      <th>More Details</th>
+      <th>Enrollment Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -47,20 +49,10 @@
         <td><%= course.starting_time.strftime("%I:%M%p") %></td>
         <td><%= course.ending_time.strftime("%I:%M%p") %></td>
         <td><%= link_to 'Show', course %></td>
-        <% if admin %>
-          <td><%= link_to 'Edit', edit_course_path(course) %></td>
-          <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-        <% if !admin && !@courses_enrolled.include?(course) %>
-          <td><%= link_to 'Enroll', enroll_course_path(:id => course.id) %></td>
-        <% end %>
+        <td><%= link_to 'Un-enroll', unenroll_course_path(:id => course.id) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<% if admin %>
-  <%= link_to 'New Course', new_course_path %>
-<% end %>

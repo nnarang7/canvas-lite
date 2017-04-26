@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421032813) do
+ActiveRecord::Schema.define(version: 20170421053551) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "name"
@@ -28,10 +28,17 @@ ActiveRecord::Schema.define(version: 20170421032813) do
     t.string   "name"
     t.string   "professor"
     t.string   "location"
-    t.string   "weekdays"
-    t.string   "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "monday"
+    t.boolean  "tuesday"
+    t.boolean  "wednesday"
+    t.boolean  "thursday"
+    t.boolean  "friday"
+    t.boolean  "saturday"
+    t.boolean  "sunday"
+    t.time     "starting_time"
+    t.time     "ending_time"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "courses_assignments", force: :cascade do |t|
@@ -39,6 +46,13 @@ ActiveRecord::Schema.define(version: 20170421032813) do
     t.string   "assignment_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "courses_users", force: :cascade do |t|
+    t.string   "course_id"
+    t.string   "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

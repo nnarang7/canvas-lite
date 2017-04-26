@@ -45,6 +45,15 @@
   <%= @course.starting_time.strftime("%I:%M%p") %> to <%= @course.ending_time.strftime("%I:%M%p") %>
 </p>
 
+<p>
+  <strong>Assignments:</strong><br>
+  <% @course.assignments.each do |assignment| %>
+    <%= assignment.name %>: <%= assignment.description %>
+    <br>
+    Due on: <%= assignment.due %>
+  <% end %>
+</p>
+
 <% if admin %>
   <%= link_to 'Edit', edit_course_path(@course) %> |
 <% end %>

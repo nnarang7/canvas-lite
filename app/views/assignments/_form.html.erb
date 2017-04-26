@@ -28,8 +28,9 @@
     <%= f.text_field :out_of %>
   </div>
   <div class="field">
-    <%= f.label :course_id %><br>
-    <%= f.text_field :course_id %>
+    <%= f.label :course %><br>
+    <%= f.collection_select :course_id, Course.order(:name),:id,:name, include_blank: true %>
+
   </div>
   <div class="field">
     <%= f.label :due %><br>

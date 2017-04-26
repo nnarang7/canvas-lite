@@ -10,6 +10,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
+    @course = Course.find(@assignment.course_id)
   end
 
   # GET /assignments/new
@@ -25,6 +26,9 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = Assignment.new(assignment_params)
+    @course = Course.find(@assignment.course_id)
+    @course.assignments.push(@assignment)
+    @course.save
 
     respond_to do |format|
       if @assignment.save

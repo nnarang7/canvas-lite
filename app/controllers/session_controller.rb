@@ -8,7 +8,11 @@ class SessionController < ApplicationController
       redirect_to login_path
     elsif @user.password == params[:password]
       session[:user_id] = @user.id
-      redirect_to @user
+      if @user.is_admin
+        redirect_to @user
+      else
+        redirect_to dashboard_path
+      end
     end  	
   end
 

@@ -10,10 +10,12 @@
   <%= @assignment.description %>
 </p>
 
-<p>
-  <strong>Score:</strong>
-  <%= @assignment.score %>
-</p>
+<% if !admin %>
+  <p>
+    <strong>Score:</strong>
+    <%= @assignment.score %>
+  </p>
+<% end %>
 
 <p>
   <strong>Out of:</strong>
@@ -22,7 +24,8 @@
 
 <p>
   <strong>Course:</strong>
-  <%= @assignment.course_id %>
+  <%= link_to @course.name, @course %></td>
+  <br>
 </p>
 
 <p>

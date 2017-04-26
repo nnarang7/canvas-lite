@@ -5,11 +5,16 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.all
+    p "in show"
+    @student = User.find(session[:user_id])
+    @courses_enrolled = @student.courses
+    p @courses_enrolled   
   end
 
   # GET /courses/1
   # GET /courses/1.json
   def show
+
   end
 
   # GET /courses/new
@@ -19,6 +24,35 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+  end
+
+  def individual_view
+    @student = User.find(session[:user_id])
+    @courses = @student.courses
+    render :student_courses
+  end
+
+  def enroll
+    @course = Course.find(params[:id])
+    @student = User.find(session[:user_id])
+    @course.users.push(@student)
+    @student.courses.push(@course)
+    @course.save
+    @student.save
+
+    redirect_to dashboard_path
+  end
+
+  def unenroll
+    @course = Course.find(params[:id])
+    @student = User.find(session[:user_id])
+    @course.users.delete(@student)
+    @student.courses.delete(@course)
+    @course.save
+    @student.save
+
+    redirect_to dashboard_path
+
   end
 
   # POST /courses
