@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
 
+  get 'submissions/index'
+
+  get 'submissions/new'
+
+  get 'submissions/create'
+
+  get 'submissions/destroy'
+
+  get 'submission/index'
+
+  get 'submission/new'
+
+  get 'submission/create'
+
+  get 'submission/destroy'
+
   root 'welcome#index'
 
   get '/login' => 'session#new'
@@ -14,13 +30,14 @@ Rails.application.routes.draw do
 
   get '/unenroll_course' => 'courses#unenroll', as: :unenroll_course
 
-  get '/my_assignments' => 'assignments#individual_view'
+  get '/my_assignments' => 'assignments#individual_view', as: :my_assignments
 
-  get '/submit_assignment' => 'assignments#submit', as: :submit_assignment
+  get '/submit_assignment' => 'submissions#new', as: :submit_assignment
 
   resources :assignments
   resources :courses
   resources :users
+  resources :submissions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

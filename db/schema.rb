@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421053551) do
+ActiveRecord::Schema.define(version: 20170426034539) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "type"
-    t.float    "score"
     t.float    "out_of"
     t.string   "course_id"
     t.datetime "due"
@@ -54,6 +53,16 @@ ActiveRecord::Schema.define(version: 20170421053551) do
     t.string   "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "attachment"
+    t.string   "user_id"
+    t.string   "assignment_id"
+    t.float    "score"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|

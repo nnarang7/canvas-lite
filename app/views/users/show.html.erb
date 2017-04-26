@@ -1,14 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
+  <strong><%= @user.name %></strong>
 </p>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
+
+<p>
+  <% if !admin %>
+  	<strong>Courses Enrolled in:</strong>
+  	<br>
+  	<% @user.courses.each do |course| %>
+  		<%= link_to course.name, course %> | 
+          <%= course.professor %> | 
+          <%= course.location %>
+          <br>
+  	<% end %>
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

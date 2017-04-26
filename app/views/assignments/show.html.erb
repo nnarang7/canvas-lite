@@ -15,12 +15,16 @@
   <%= @assignment.type %>
 </p>
 
-<% if !admin %>
-  <p>
-    <strong>Score:</strong>
-    <%= @assignment.score %>
-  </p>
-<% end %>
+<p>
+  <% if !admin %>
+    <strong>Score: </strong>
+    <% if Submission.find_by(assignment_id: @assignment.id) != nil && Submission.find_by(assignment_id: @assignment.id).score != nil %>
+      <%= Submission.find_by(assignment_id: @assignment.id).score %>
+    <% else %>
+      Not currently available
+    <% end %>
+  <% end %>
+</p>
 
 <p>
   <strong>Out of:</strong>
@@ -35,8 +39,24 @@
 
 <p>
   <strong>Due:</strong>
-  <%= @assignment.due %>
+  <%= @assignment.due.strftime("%I:%M%p") %>
 </p>
+
+<p>
+  <% if !admin %>
+    <strong>Submission:</strong>
+      <% if Submission.find_by(assignment_id: @assignment.id) == nil %>
+        <%= link_to 'Submit', submit_assignment_path(:assignment_id => @assignment.id) %>
+      <% else %>
+        <%= link_to 'View Submission', Submission.find_by(assignment_id: @assignment.id).attachment_url %>
+        <%= link_to 'Delete Submission', Submission.find_by(assignment_id: @assignment.id), method: :delete, data: { confirm: 'Are you sure you want to delete this submission?' } %>            
+      <% end %>  
+  <% else %>
+    <%= link_to 'View All Submissions', submissions_path(:assignment_id => @assignment.id) %>
+  <% end %>
+</p>
+
+
 
 <%= link_to 'Edit', edit_assignment_path(@assignment) %> |
 <%= link_to 'Back', assignments_path %>

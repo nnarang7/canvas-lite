@@ -4,7 +4,6 @@ class CreateAssignments < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :type
-      t.float :score
       t.float :out_of
       t.string :course_id
       t.datetime :due

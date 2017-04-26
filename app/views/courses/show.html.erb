@@ -48,9 +48,9 @@
 <p>
   <strong>Assignments:</strong><br>
   <% @course.assignments.each do |assignment| %>
-    <%= assignment.name %>: <%= assignment.description %>
+    <%= link_to assignment.name, assignment %>: <%= assignment.description %>
     <br>
-    Due on: <%= assignment.due %>
+    Due on: <%= assignment.due.strftime("%I:%M%p") %>
   <% end %>
 </p>
 

@@ -26,13 +26,22 @@
         <td><%= assignment.description %></td>
         <td><%= Course.find(assignment.course_id).name %></td>
         <td><%= assignment.due.strftime("%I:%M%p") %></td>
-        <td><% if assignment.score != nil %>
-          assignment.score
+        <td><% if Submission.find_by(assignment_id: assignment.id) != nil && Submission.find_by(assignment_id: assignment.id).score != nil%><%=
+          Submission.find_by(assignment_id: assignment.id).score %>
           <% else %>
           Not currently available
           <% end %></td>        
-        <td><%= link_to 'More Details', assignment %></td>
-        <td><%= link_to 'Submit', submit_assignment_path %></td>
+<!--         <td><%= link_to 'More Details', assignment %></td> -->
+        <td>
+          <% if !admin %>
+            <% if Submission.find_by(assignment_id: assignment.id) == nil %>
+              <%= link_to 'Submit', submit_assignment_path(:assignment_id => assignment.id) %>
+            <% else %>
+              <%= link_to 'Download Submission', Submission.find_by(assignment_id: assignment.id).attachment_url %>
+              <%= link_to 'Delete Submission', Submission.find_by(assignment_id: assignment.id), method: :delete, data: { confirm: 'Are you sure you want to delete this submission?' } %>            
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Submissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Submitted by:</th>    	
+      <th>Submission Link</th>
+      <th>On Time?</th>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <tr>
+      	<td><%= User.find(submission.user_id).name %></td>
+        <td><%= link_to submission.name, submission.attachment_url%></td>
+        
+        <td><% if submission.created_at < Assignment.find(@assignment_id).due %>
+        		Yes
+        	<% else %>
+        		Late!
+        	<% end %>
+        </td>
+        <td>
+        	<% if submission.score != nil %> 
+        		<%= submission.score %>
+        	<% else %>
+        		<%= link_to 'Submit Score', edit_submission_path(submission, :assignment_id => submission.assignment_id, :user_id => submission.user_id)  %>
+        	<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
