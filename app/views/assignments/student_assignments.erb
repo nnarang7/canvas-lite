@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Assignments</h1>
+<h1>My Assignments</h1>
 
 <table>
   <thead>
@@ -10,6 +10,10 @@
       <th>Description</th>
       <th>Course</th>
       <th>Due</th>
+      <th>Score</th>
+      <th></th>
+      <th></th>
+      
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,10 +25,14 @@
         <td><%= assignment.name %></td>
         <td><%= assignment.description %></td>
         <td><%= Course.find(assignment.course_id).name %></td>
-        <td><%= assignment.due %></td>
-        <td><%= link_to 'Show', assignment %></td>
-        <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
-        <td><%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= assignment.due.strftime("%I:%M%p") %></td>
+        <td><% if assignment.score != nil %>
+          assignment.score
+          <% else %>
+          Not currently available
+          <% end %></td>        
+        <td><%= link_to 'More Details', assignment %></td>
+        <td><%= link_to 'Submit', submit_assignment_path %></td>
       </tr>
     <% end %>
   </tbody>

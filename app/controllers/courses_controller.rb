@@ -36,9 +36,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @student = User.find(session[:user_id])
     @course.users.push(@student)
-    @student.courses.push(@course)
     @course.save
-    @student.save
 
     redirect_to dashboard_path
   end
@@ -47,9 +45,9 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @student = User.find(session[:user_id])
     @course.users.delete(@student)
-    @student.courses.delete(@course)
+    # @student.courses.delete(@course)
     @course.save
-    @student.save
+    # @student.save
 
     redirect_to dashboard_path
 

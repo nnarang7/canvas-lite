@@ -22,6 +22,17 @@ class AssignmentsController < ApplicationController
   def edit
   end
 
+  def individual_view
+    @student = User.find(session[:user_id])
+    @courses = @student.courses
+    @assignments = []
+    for course in @courses do 
+      @assignments = @assignments + course.assignments
+    end
+    @assigments = @assignments.sort_by{ |assignment| assignment.due }
+    render :student_assignments
+  end
+
   # POST /assignments
   # POST /assignments.json
   def create
@@ -73,6 +84,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:name, :description, :score, :out_of, :course_id, :due)
+      params.require(:assignment).permit(:name, :description, :score, :out_of, :course_id, :due, :type)
     end
 end

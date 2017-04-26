@@ -3,6 +3,7 @@ class CreateAssignments < ActiveRecord::Migration
     create_table :assignments do |t|
       t.string :name
       t.string :description
+      t.string :type
       t.float :score
       t.float :out_of
       t.string :course_id

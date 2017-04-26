@@ -20,9 +20,10 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :score %><br>
-    <%= f.text_field :score %>
-  </div>
+    <%= f.label :type %><br>
+    <%= f.select :type, ['Exam', 'Project','Assignment']%>
+
+  </div>  
   <div class="field">
     <%= f.label :out_of %><br>
     <%= f.text_field :out_of %>

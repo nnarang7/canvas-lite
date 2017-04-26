@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   get '/unenroll_course' => 'courses#unenroll', as: :unenroll_course
 
+  get '/my_assignments' => 'assignments#individual_view'
+
+  get '/submit_assignment' => 'assignments#submit', as: :submit_assignment
+
   resources :assignments
   resources :courses
   resources :users

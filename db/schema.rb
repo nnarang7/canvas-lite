@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170421053551) do
   create_table "assignments", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "type"
     t.float    "score"
     t.float    "out_of"
     t.string   "course_id"
