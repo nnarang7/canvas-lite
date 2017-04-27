@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170426034539) do
     t.string   "description"
     t.string   "entry_type"
     t.float    "out_of"
-    t.string   "course_id"
+    t.integer  "course_id"
     t.datetime "due"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -36,15 +36,15 @@ ActiveRecord::Schema.define(version: 20170426034539) do
   end
 
   create_table "courses_assignments", force: :cascade do |t|
-    t.string   "course_id"
-    t.string   "assignment_id"
+    t.integer  "course_id"
+    t.integer  "assignment_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
   create_table "courses_users", force: :cascade do |t|
-    t.string   "course_id"
-    t.string   "user_id"
+    t.integer  "course_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20170426034539) do
   create_table "submissions", force: :cascade do |t|
     t.string   "name"
     t.string   "attachment"
-    t.string   "user_id"
-    t.string   "assignment_id"
+    t.integer  "user_id"
+    t.integer  "assignment_id"
     t.float    "score"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

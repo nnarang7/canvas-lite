@@ -3,8 +3,8 @@ class CreateSubmissions < ActiveRecord::Migration
     create_table :submissions do |t|
       t.string :name
       t.string :attachment
-      t.string :user_id
-      t.string :assignment_id
+      t.integer :user_id
+      t.integer :assignment_id
       t.float :score
 
       t.timestamps null: false

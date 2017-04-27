@@ -5,7 +5,7 @@ class CreateAssignments < ActiveRecord::Migration
       t.string :description
       t.string :entry_type
       t.float :out_of
-      t.string :course_id
+      t.integer :course_id
       t.datetime :due
 
       t.timestamps null: false
