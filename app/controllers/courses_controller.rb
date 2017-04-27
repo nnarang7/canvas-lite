@@ -11,9 +11,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1
   # GET /courses/1.json
-  def show
-
-  end
+  def show; end
 
   # GET /courses/new
   def new
@@ -21,8 +19,7 @@ class CoursesController < ApplicationController
   end
 
   # GET /courses/1/edit
-  def edit
-  end
+  def edit; end
 
   def individual_view
     @student = User.find(session[:user_id])
@@ -45,17 +42,11 @@ class CoursesController < ApplicationController
     @course.users.delete(@student)
     @course.assignments do |assignment|
       all_submissions = Submission.where(user_id: @user.id, assignment_id: assignment.id)
-      all_submissions.each do |submission|
-        submission.destroy
-      end  
-    end    
+      all_submissions.each(&:destroy)
+    end
 
-    # @student.courses.delete(@course)
     @course.save
-    # @student.save
-
     redirect_to dashboard_path
-
   end
 
   # POST /courses
@@ -64,7 +55,7 @@ class CoursesController < ApplicationController
     p course_params
     @course = Course.new(course_params)
     weekdays_list = course_params[:weekdays].drop(1)
-    @course.weekdays = weekdays_list.join(", ")
+    @course.weekdays = weekdays_list.join(', ')
 
     respond_to do |format|
       if @course.save
@@ -94,9 +85,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
-    @course.assignments.each do |assignment|
-      assignment.destroy
-    end
+    @course.assignments.each(&:destroy)
     @course.destroy
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
@@ -105,13 +94,14 @@ class CoursesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
-    end
+  def set_course
+    @course = Course.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def course_params
-      params.require(:course).permit(:name, :professor, :location, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :starting_time, :ending_time, :weekdays => [])
-    end
-end
+  def course_params
+    params.require(:course).permit(:name, :professor, :location, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :starting_time, :ending_time, :weekdays => [])
+  end
+  end

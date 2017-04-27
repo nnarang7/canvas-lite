@@ -10,7 +10,6 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
-
     @student = User.find(session[:user_id])
     @courses = @student.courses
     @course = Course.find(@assignment.course_id)
@@ -23,17 +22,16 @@ class AssignmentsController < ApplicationController
   end
 
   # GET /assignments/1/edit
-  def edit
-  end
+  def edit; end
 
   def individual_view
     @student = User.find(session[:user_id])
     @courses = @student.courses
     @assignments = []
-    for course in @courses do 
+    @courses.each do |course|
       @assignments = @assignments + course.assignments
     end
-    @assigments = @assignments.sort_by{ |assignment| assignment.due }
+    @assigments = @assignments.sort_by(&:due)
     render :student_assignments
   end
 
@@ -41,13 +39,12 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = Assignment.new(assignment_params)
-    # @assignment.type = params[:type]
 
     respond_to do |format|
       if @assignment.save
         @course = Course.find(@assignment.course_id)
         @course.assignments.push(@assignment)
-        @course.save        
+        @course.save
         format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       else
@@ -75,9 +72,7 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1.json
   def destroy
     all_submissions = Submission.where(assignment_id: @assignment.id)
-    all_submissions.each do |submission|
-      submission.destroy
-    end
+    all_submissions.each(&:destroy)
     @assignment.destroy
     respond_to do |format|
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
@@ -86,13 +81,14 @@ class AssignmentsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
-    def set_assignment
-      @assignment = Assignment.find(params[:id])
-    end
+  def set_assignment
+    @assignment = Assignment.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def assignment_params
-      params.require(:assignment).permit(:name, :description, :score, :out_of, :course_id, :due, :entry_type)
-    end
+  def assignment_params
+    params.require(:assignment).permit(:name, :description, :score, :out_of, :course_id, :due, :entry_type)
+  end
 end

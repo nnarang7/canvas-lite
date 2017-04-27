@@ -15,11 +15,11 @@ class SessionController < ApplicationController
       end
     else
       redirect_to login_path
-    end  	
+    end
   end
 
   def destroy
     reset_session
-    redirect_to root_path  	
+    redirect_to root_path
   end
 end
