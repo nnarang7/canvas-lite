@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170426034539) do
   create_table "assignments", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.string   "type"
+    t.string   "entry_type"
     t.float    "out_of"
     t.string   "course_id"
     t.datetime "due"
@@ -28,13 +28,7 @@ ActiveRecord::Schema.define(version: 20170426034539) do
     t.string   "name"
     t.string   "professor"
     t.string   "location"
-    t.boolean  "monday"
-    t.boolean  "tuesday"
-    t.boolean  "wednesday"
-    t.boolean  "thursday"
-    t.boolean  "friday"
-    t.boolean  "saturday"
-    t.boolean  "sunday"
+    t.string   "weekdays"
     t.time     "starting_time"
     t.time     "ending_time"
     t.datetime "created_at",    null: false

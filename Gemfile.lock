@@ -37,9 +37,14 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.4)
+    autoprefixer-rails (6.7.7.2)
+      execjs
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
     carrierwave (1.0.0)
@@ -57,8 +62,8 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     i18n (0.8.1)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
@@ -80,6 +85,7 @@ GEM
     multi_json (1.12.1)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
+    pg (0.19.0)
     rack (1.6.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -150,13 +156,16 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  bootstrap-sass
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  pg
   rails (= 4.2.4)
-  sass-rails (~> 5.0)
+  sass
+  sass-rails (~> 5.0.3)
   sdoc (~> 0.4.0)
   spring
   sqlite3

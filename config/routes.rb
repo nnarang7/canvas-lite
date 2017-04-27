@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   get '/enroll_course' => 'courses#enroll', as: :enroll_course
 
-  get '/unenroll_course' => 'courses#unenroll', as: :unenroll_course
+  post '/unenroll_course' => 'courses#unenroll', as: :unenroll_course
 
   get '/my_assignments' => 'assignments#individual_view', as: :my_assignments
 
