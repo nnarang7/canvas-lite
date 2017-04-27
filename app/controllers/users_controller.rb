@@ -49,9 +49,13 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    all_submissions = Submission.where(user_id: @user.id)
+    all_submissions.each do |submission|
+      submission.destroy
+    end
     @user.destroy
-    reset_sessions
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    # reset_sessions
+    redirect_to users_path, notice: 'User was successfully destroyed.'
   end
 
   private

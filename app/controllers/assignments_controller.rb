@@ -10,7 +10,11 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
+
+    @student = User.find(session[:user_id])
+    @courses = @student.courses
     @course = Course.find(@assignment.course_id)
+    @enrolled = @courses.include?(@course)
   end
 
   # GET /assignments/new
@@ -70,6 +74,10 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1
   # DELETE /assignments/1.json
   def destroy
+    all_submissions = Submission.where(assignment_id: @assignment.id)
+    all_submissions.each do |submission|
+      submission.destroy
+    end
     @assignment.destroy
     respond_to do |format|
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }

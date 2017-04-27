@@ -16,7 +16,9 @@
               <th data-sortable="true">Starting Time</th>
               <th data-sortable="true">Ending Time</th>
               <th>More Options</th>
-              <th>Enrollment Status</th>
+              <% if !admin %>
+                <th>Enrollment Status</th>
+              <% end %>
             </tr>
             </thead>
 

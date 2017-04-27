@@ -5,10 +5,8 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.all
-    p "in show"
     @student = User.find(session[:user_id])
     @courses_enrolled = @student.courses
-    p @courses_enrolled   
   end
 
   # GET /courses/1
@@ -45,6 +43,13 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @student = User.find(session[:user_id])
     @course.users.delete(@student)
+    @course.assignments do |assignment|
+      all_submissions = Submission.where(user_id: @user.id, assignment_id: assignment.id)
+      all_submissions.each do |submission|
+        submission.destroy
+      end  
+    end    
+
     # @student.courses.delete(@course)
     @course.save
     # @student.save
