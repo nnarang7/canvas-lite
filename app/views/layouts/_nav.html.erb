@@ -1,5 +1,7 @@
 <nav class="nav-banner">
-  <a class="nav-btn" href="/">Home</a>
+  <% if !logged_in? %>
+    <a class="nav-btn" href="/">Home</a>
+  <% end %>
   <% if logged_in? && !admin %>
     <a class="nav-btn" href="/my_courses">My Courses</a>
     <a class="nav-btn" href="/my_assignments">Upcoming Assignments</a>

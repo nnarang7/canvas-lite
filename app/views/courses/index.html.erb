@@ -1,19 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-success panel-heading" role="alert">
+  <p id="notice"><%= notice %></p></div>
 
-<h1>Listing Courses</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Professor</th>
-      <th>Location</th>
-      <th>Weekdays</th>
-      <th>Starting Time</th>
-      <th>Ending Time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">All Courses</div>
+      <div class="panel-body">
+        <table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" id="table-style" data-row-style="rowStyle">
+            <thead>
+            <tr>
+              <th data-sortable="true">Name</th>
+              <th data-sortable="true">Professor</th>
+              <th data-sortable="true">Location</th>
+              <th data-sortable="true">Weekdays</th>
+              <th data-sortable="true">Starting Time</th>
+              <th data-sortable="true">Ending Time</th>
+              <th>More Options</th>
+              <th>Enrollment Status</th>
+            </tr>
+            </thead>
 
   <tbody>
     <% @courses.each do |course| %>
@@ -22,38 +27,22 @@
         <td><%= course.professor %></td>
         <td><%= course.location %></td>
         <td>
-          <% if course.monday %> 
-            Monday,
-          <% end %>
-          <% if course.tuesday %> 
-            Tuesday,
-          <% end %>
-          <% if course.wednesday %> 
-            Wednesday,
-          <% end %>
-          <% if course.thursday %> 
-            Thursday,
-          <% end %>
-          <% if course.friday %> 
-            Friday,
-          <% end %>
-          <% if course.saturday %> 
-            Saturday,
-          <% end %>
-          <% if course.sunday %> 
-            Sunday
-          <% end %>     
+          <%= course.weekdays %>   
         </td>      
         <td><%= course.starting_time.strftime("%I:%M%p") %></td>
         <td><%= course.ending_time.strftime("%I:%M%p") %></td>
-        <td><%= link_to 'Show', course %></td>
+        <td><%= button_to 'Show', course, :method => :get, class: 'btn btn-success' %><br>
         <% if admin %>
-          <td><%= link_to 'Edit', edit_course_path(course) %></td>
-          <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= button_to 'Edit', edit_course_path(course), :method => :get, class: 'btn btn-warning' %><br>
+          <%= button_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %><br>
         <% end %>
         <% if !admin && !@courses_enrolled.include?(course) %>
-          <td><%= link_to 'Enroll', enroll_course_path(:id => course.id) %></td>
-        <% end %>
+          <td><%= button_to 'Enroll', enroll_course_path(:id => course.id), :method => :get, :params => {:id => course.id}, class: 'btn btn-primary' %></td>
+        <% end %>   
+        <% if !admin && @courses_enrolled.include?(course) %>
+          <td><%= button_to 'Un-Enroll', unenroll_course_path(:id => course.id), :method => :post, :params => {:id => course.id}, class: 'btn btn-primary' %></td>
+        <% end %>              
+      </td>
       </tr>
     <% end %>
   </tbody>
@@ -62,5 +51,5 @@
 <br>
 
 <% if admin %>
-  <%= link_to 'New Course', new_course_path %>
+  <%= button_to 'New Course', new_course_path, :method => :get, class: 'btn btn-primary' %>
 <% end %>

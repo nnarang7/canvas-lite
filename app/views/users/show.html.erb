@@ -1,27 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-success panel-heading" role="alert">
+  <p id="notice"><%= notice %></p></div>
 
-<p>
-  <strong><%= @user.name %></strong>
-</p>
+<div class="panel panel-primary">
+  <div class="panel-heading"><%= @user.name %></div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-<p>
-  <% if !admin %>
-  	<strong>Courses Enrolled in:</strong>
-  	<br>
-  	<% @user.courses.each do |course| %>
-  		<%= link_to course.name, course %> | 
-          <%= course.professor %> | 
-          <%= course.location %>
-          <br>
-  	<% end %>
-  <% end %>
-</p>
+  <p>
+    <% if !admin %>
+    	<strong>Courses Enrolled in:</strong>
+    	<br>
+    	<% @user.courses.each do |course| %>
+    		<%= link_to course.name, course %> | 
+            <%= course.professor %> | 
+            <%= course.location %>
+            <br>
+    	<% end %>
+    <% end %>
+  </p>
+</div>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= button_to 'Edit', edit_user_path(@user), :method => :get, class: 'btn btn-warning' %><br>
+<%= button_to 'Back', users_path, :method => :get, class: 'btn btn-parimary' %>

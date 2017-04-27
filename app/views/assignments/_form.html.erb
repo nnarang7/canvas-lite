@@ -1,43 +1,53 @@
+<div class="panel-body">
+  <div class="col-md-6">
+
 <%= form_for(@assignment) do |f| %>
   <% if @assignment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
-
-      <ul>
-      <% @assignment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="panel panel-danger" role="alert">
+      <div class="panel-heading">
+        <%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved: 
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @assignment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :type %><br>
-    <%= f.select :type, ['Exam', 'Project','Assignment']%>
+    <div class="form-group">
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name%>
+      </div>
+      <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_field :description, class: "form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :entry_type %><br>
+        <%= f.select(:entry_type, [['Exam', 'Exam'], ['Project', 'Project'],['Assignment', 'Assignment']], { :prompt => "Please select"}, { :multiple => false, :size => 3 }) %>
+      </div>  
+      <div class="field">
+        <%= f.label :out_of %><br>
+        <%= f.text_field :out_of, class: "form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :course %><br>
+        <%= f.collection_select :course_id, Course.order(:name),:id,:name, include_blank: false, class: "form-control" %>
 
-  </div>  
-  <div class="field">
-    <%= f.label :out_of %><br>
-    <%= f.text_field :out_of %>
+      </div>
+      <div class="field">
+        <%= f.label :due %><br>
+        <%= f.datetime_select :due, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :course %><br>
-    <%= f.collection_select :course_id, Course.order(:name),:id,:name, include_blank: true %>
+</div>
 
-  </div>
-  <div class="field">
-    <%= f.label :due %><br>
-    <%= f.datetime_select :due %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

@@ -1,65 +1,61 @@
+<div class="panel-body">
+  <div class="col-md-6">
+
 <%= form_for(@course) do |f| %>
   <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
-      <ul>
+    <div class="panel panel-danger" role="alert">
+      <div class="panel-heading">
+        <%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:
+      </div>
+      <div class="panel-body">
+        <ul>
       <% @course.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <div class="form-group">
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :professor %><br>
+        <%= f.text_field :professor, class: "form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :location %><br>
+        <%= f.text_field :location, class: "form-control"  %>
+      </div> 
+      <div class="field">
+        <%= f.label :weekdays %><br>
+        <%= f.select(:weekdays, [['Monday', 'Monday'],
+                                      ['Tuesday', 'Tuesday'],
+                                      ['Wednesday', 'Wednesday'],
+                                      ['Thursday', 'Thursday'],
+                                      ['Friday', 'Friday'],
+                                      ['Saturday', 'Saturday'],
+                                      ['Sunday','Sunday']
+                                     ],{ :prompt => "Please select"},
+                                       { :multiple => true, :size => 7 }
+                                     ) %>
+      </div>                     
+      <div class="field">
+        <%= f.label :starting_time %><br>
+        <%= f.time_field :starting_time, class: "form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :ending_time %><br>
+        <%= f.time_field :ending_time, class: "form-control"  %>
+      </div>  
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :professor %><br>
-    <%= f.text_field :professor %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :monday %><br>
-    <%= f.check_box :monday %>
-  </div>
-  <div class="field">
-    <%= f.label :tuesday %><br>
-    <%= f.check_box :tuesday %>
-  </div>
-  <div class="field">
-    <%= f.label :wednesday %><br>
-    <%= f.check_box :wednesday %>
-  </div>
-  <div class="field">
-    <%= f.label :thursday %><br>
-    <%= f.check_box :thursday %>
-  </div>    
-  <div class="field">
-    <%= f.label :friday %><br>
-    <%= f.check_box :friday %>
-  </div>    
-  <div class="field">
-    <%= f.label :saturday %><br>
-    <%= f.check_box :saturday %>
-  </div> 
-  <div class="field">
-    <%= f.label :sunday %><br>
-    <%= f.check_box :sunday %>
-  </div>              
-  <div class="field">
-    <%= f.label :starting_time %><br>
-    <%= f.time_field :starting_time %>
-  </div>
-  <div class="field">
-    <%= f.label :ending_time %><br>
-    <%= f.time_field :ending_time %>
-  </div>  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+      
 <% end %>

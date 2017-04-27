@@ -13,6 +13,8 @@ class SessionController < ApplicationController
       else
         redirect_to dashboard_path
       end
+    else
+      redirect_to login_path
     end  	
   end
 

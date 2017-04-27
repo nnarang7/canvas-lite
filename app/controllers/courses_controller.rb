@@ -58,6 +58,8 @@ class CoursesController < ApplicationController
   def create
     p course_params
     @course = Course.new(course_params)
+    weekdays_list = course_params[:weekdays].drop(1)
+    @course.weekdays = weekdays_list.join(", ")
 
     respond_to do |format|
       if @course.save
@@ -87,6 +89,9 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
+    @course.assignments.each do |assignment|
+      assignment.destroy
+    end
     @course.destroy
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
@@ -102,6 +107,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :professor, :location, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :starting_time, :ending_time)
+      params.require(:course).permit(:name, :professor, :location, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :starting_time, :ending_time, :weekdays => [])
     end
 end

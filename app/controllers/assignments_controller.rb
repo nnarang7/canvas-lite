@@ -37,12 +37,13 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = Assignment.new(assignment_params)
-    @course = Course.find(@assignment.course_id)
-    @course.assignments.push(@assignment)
-    @course.save
+    # @assignment.type = params[:type]
 
     respond_to do |format|
       if @assignment.save
+        @course = Course.find(@assignment.course_id)
+        @course.assignments.push(@assignment)
+        @course.save        
         format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       else
@@ -84,6 +85,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:name, :description, :score, :out_of, :course_id, :due, :type)
+      params.require(:assignment).permit(:name, :description, :score, :out_of, :course_id, :due, :entry_type)
     end
 end

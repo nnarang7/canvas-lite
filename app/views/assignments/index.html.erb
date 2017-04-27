@@ -1,35 +1,69 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-success panel-heading" role="alert">
+  <p id="notice"><%= notice %></p></div>
 
-<h1>Listing Assignments</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">All Assignments</div>
+      <div class="panel-body">
+        <table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" id="table-style" data-row-style="rowStyle">
+            <thead>
+            <tr>
+              <th data-sortable="true">Type</th>
+              <th data-sortable="true">Name</th>
+              <th data-sortable="true">Description</th>
+              <th data-sortable="true">Course</th>
+              <th data-sortable="true">Due</th>
+              <th>More Options</th>
+            </tr>
+            </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Course</th>
-      <th>Due</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+            <tbody>
+              <% @assignments.each do |assignment| %>
+                <tr>
+                  <td><%= assignment.entry_type %></td>
+                  <td><%= assignment.name %></td>
+                  <td><%= assignment.description %></td>
+                  <td><%= Course.find(assignment.course_id).name %></td>
+                  <td><%= assignment.due.strftime("%B %C, %Y") %><br><%= assignment.due.strftime("%I:%M%p") %></td>
+                  <td><%= button_to 'Show', assignment, :method => :get, class: 'btn btn-success' %><br>
+                    <%= button_to 'Edit', edit_assignment_path(assignment), :method => :get, class: 'btn btn-warning' %><br>
+                    <%= button_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <script>
+              $(function () {
+                  $('#hover, #striped, #condensed').click(function () {
+                      var classes = 'table';
 
-  <tbody>
-    <% @assignments.each do |assignment| %>
-      <tr>
-        <td><%= assignment.type %></td>
-        <td><%= assignment.name %></td>
-        <td><%= assignment.description %></td>
-        <td><%= Course.find(assignment.course_id).name %></td>
-        <td><%= assignment.due %></td>
-        <td><%= link_to 'Show', assignment %></td>
-        <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
-        <td><%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                      if ($('#hover').prop('checked')) {
+                          classes += ' table-hover';
+                      }
+                      if ($('#condensed').prop('checked')) {
+                          classes += ' table-condensed';
+                      }
+                      $('#table-style').bootstrapTable('destroy')
+                          .bootstrapTable({
+                              classes: classes,
+                              striped: $('#striped').prop('checked')
+                          });
+                  });
+              });
+
+              function rowStyle(row, index) {
+                  var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+                  if (index % 2 === 0 && index / 2 < classes.length) {
+                      return {
+                          classes: classes[index / 2]
+                      };
+                  }
+                  return {};
+              }
+          </script> 
 
 <br>
 
-<%= link_to 'New Assignment', new_assignment_path %>
+<%= button_to 'New Assignment', new_assignment_path, :method => :get, class: 'btn btn-primary' %>

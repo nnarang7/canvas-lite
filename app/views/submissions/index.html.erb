@@ -1,15 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-success panel-heading" role="alert">
+  <p id="notice"><%= notice %></p></div>
 
-<h1>Listing Submissions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Submitted by:</th>    	
-      <th>Submission Link</th>
-      <th>On Time?</th>
-      <th>Score</th>
-      <th colspan="3"></th>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">All Submissions</div>
+      <div class="panel-body">
+        <table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" id="table-style" data-row-style="rowStyle">
+            <thead>
+            <tr>
+      <th data-sortable="true">Submitted by:</th>    	
+      <th data-sortable="true">Submission Link</th>
+      <th data-sortable="true">On Time?</th>
+      <th data-sortable="true">Score</th>
     </tr>
   </thead>
 
@@ -29,7 +32,7 @@
         	<% if submission.score != nil %> 
         		<%= submission.score %>
         	<% else %>
-        		<%= link_to 'Submit Score', edit_submission_path(submission, :assignment_id => submission.assignment_id, :user_id => submission.user_id)  %>
+        		<%= button_to 'Submit Score', edit_submission_path(submission, :assignment_id => submission.assignment_id, :user_id => submission.user_id), method => :post, :params => {:assignment_id => submission, :user_id => submission.user_id}  %>
         	<% end %>
         </td>
       </tr>
