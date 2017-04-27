@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   def index
-  	@submissions = Submission.where(params[:assignment_id])
+  	@submissions = Submission.where(assignment_id: params[:assignment_id])
   	@assignment_id = params[:assignment_id]
   	p @assignment_id
   end
